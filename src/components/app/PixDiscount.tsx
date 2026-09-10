@@ -9,6 +9,8 @@ export function PixDiscount() {
   const [valor, setValor] = useState(2579.2);
   const [desconto, setDesconto] = useState(10);
   const [aberto, setAberto] = useState(true);
+  const [erro, setErro] = useState(false);
+
 
   const final = useMemo(() => valor * (1 - desconto / 100), [valor, desconto]);
   const economia = valor - final;
