@@ -13,7 +13,7 @@ export function SectionHeader({
     <button
       type="button"
       onClick={onClick}
-      className="press flex items-center gap-1.5 text-left text-lg font-semibold text-foreground"
+      className="press flex items-center gap-1.5 text-left font-semibold text-foreground"
     >
       {title}
       <ChevronRight className="h-5 w-5" strokeWidth={2.5} />
@@ -133,7 +133,7 @@ export function Pill({
       type="button"
       onClick={onClick}
       className={cn(
-        "press shrink-0 rounded-full px-4 py-2.5 text-sm font-medium",
+        "press shrink-0 rounded-full px-3.5 py-2 text-sm font-medium",
         active
           ? "bg-primary/60 text-foreground"
           : "bg-card text-muted-foreground hover:text-foreground",
@@ -159,7 +159,7 @@ export function Card({
     <Comp
       {...(onClick ? { type: "button" as const, onClick } : {})}
       className={cn(
-        "rounded-2xl bg-card p-4 text-left",
+        "rounded-2xl bg-card p-3.5 text-left",
         onClick ? "press hover:bg-elevated" : "",
         className,
       )}

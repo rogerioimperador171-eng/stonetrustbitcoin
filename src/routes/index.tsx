@@ -23,6 +23,8 @@ export const Route = createFileRoute("/")({
         content:
           "Carteira cripto com mercados, perps, gerador de código de transação e Pix com desconto.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: Index,

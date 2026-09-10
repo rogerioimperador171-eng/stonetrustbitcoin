@@ -15,8 +15,6 @@ function makeCode(len: number, groups: number) {
 }
 
 export function CodeGenerator() {
-  const [len, setLen] = useState(4);
-  const [groups, setGroups] = useState(3);
   const [code, setCode] = useState("STN-4KQ9-P2XM");
   const [copied, setCopied] = useState(false);
   const [history, setHistory] = useState<string[]>([]);
@@ -31,7 +29,7 @@ export function CodeGenerator() {
   }, []);
 
   const generate = () => {
-    const next = `STN-${makeCode(len, groups)}`;
+    const next = `STN-${makeCode(4, 3)}`;
     setCode(next);
     setCopied(false);
     setHistory((h) => {
@@ -58,53 +56,28 @@ export function CodeGenerator() {
   };
 
   return (
-    <section className="space-y-5 rounded-3xl border border-border bg-card/60 p-5">
+    <section className="space-y-4 rounded-2xl border border-border bg-card/60 p-4">
       <div>
         <p className="text-sm font-medium uppercase tracking-widest text-stone-brand">
           Gerador de código
         </p>
-        <h2 className="mt-1 text-2xl font-bold leading-tight">Código aleatório de transação</h2>
+        <h2 className="mt-1 text-xl font-bold leading-tight">Código aleatório de transação</h2>
         <p className="mt-1 text-sm text-muted-foreground">
           Gere um código único para identificar cada recebimento.
         </p>
       </div>
 
-      <div className="rounded-2xl bg-background px-4 py-6 text-center">
-        <p className="break-all font-mono text-2xl font-bold tracking-[0.15em] sm:text-3xl">
+      <div className="rounded-xl bg-background px-4 py-5 text-center">
+        <p className="break-all font-mono text-xl font-bold tracking-[0.12em] sm:text-2xl">
           {code}
         </p>
-      </div>
-
-      <div className="grid gap-4 sm:grid-cols-2">
-        <label className="block text-sm">
-          <span className="text-muted-foreground">Caracteres por bloco: {len}</span>
-          <input
-            type="range"
-            min={3}
-            max={6}
-            value={len}
-            onChange={(e) => setLen(Number(e.target.value))}
-            className="mt-2 w-full accent-[var(--primary)]"
-          />
-        </label>
-        <label className="block text-sm">
-          <span className="text-muted-foreground">Blocos: {groups}</span>
-          <input
-            type="range"
-            min={1}
-            max={5}
-            value={groups}
-            onChange={(e) => setGroups(Number(e.target.value))}
-            className="mt-2 w-full accent-[var(--primary)]"
-          />
-        </label>
       </div>
 
       <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-3">
         <button
           type="button"
           onClick={generate}
-          className="press flex items-center justify-center gap-2 rounded-full bg-primary py-3.5 text-[17px] font-semibold text-primary-foreground"
+          className="press flex items-center justify-center gap-2 rounded-full bg-primary py-3 text-sm font-semibold text-primary-foreground"
         >
           <RefreshCw className="h-5 w-5" /> Gerar código
         </button>
@@ -112,7 +85,7 @@ export function CodeGenerator() {
           type="button"
           onClick={copy}
           aria-label="Copiar código"
-          className="press flex h-[52px] w-[52px] items-center justify-center rounded-full bg-elevated"
+          className="press flex h-11 w-11 items-center justify-center rounded-full bg-elevated"
         >
           {copied ? <Check className="h-5 w-5 text-up" /> : <Copy className="h-5 w-5" />}
         </button>
