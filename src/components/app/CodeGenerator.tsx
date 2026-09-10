@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Check, Copy, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 
 const ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+const HISTORY_KEY = "stone-code-history";
+
 
 function makeCode(len: number, groups: number) {
   const raw = Array.from({ length: len * groups }, () => {
@@ -19,12 +21,30 @@ export function CodeGenerator() {
   const [copied, setCopied] = useState(false);
   const [history, setHistory] = useState<string[]>([]);
 
+  useEffect(() => {
+    try {
+      const saved = sessionStorage.getItem(HISTORY_KEY);
+      if (saved) setHistory(JSON.parse(saved) as string[]);
+    } catch {
+      /* sessão indisponível */
+    }
+  }, []);
+
   const generate = () => {
     const next = `STN-${makeCode(len, groups)}`;
     setCode(next);
     setCopied(false);
-    setHistory((h) => [next, ...h].slice(0, 5));
+    setHistory((h) => {
+      const list = [next, ...h].slice(0, 8);
+      try {
+        sessionStorage.setItem(HISTORY_KEY, JSON.stringify(list));
+      } catch {
+        /* sessão indisponível */
+      }
+      return list;
+    });
   };
+
 
   const copy = async () => {
     try {
