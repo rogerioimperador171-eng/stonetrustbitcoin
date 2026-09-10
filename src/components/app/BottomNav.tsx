@@ -36,9 +36,10 @@ export function BottomNav({
         type="button"
         onClick={() => onChange("search")}
         aria-label="Buscar"
-        className={`press pointer-events-auto flex h-[60px] w-[60px] shrink-0 items-center justify-center rounded-full border border-border bg-background/85 backdrop-blur-xl ${
-          tab === "search" ? "bg-accent" : ""
+        className={`press pointer-events-auto flex h-[60px] w-[60px] shrink-0 items-center justify-center rounded-full border border-border backdrop-blur-xl ${
+          tab === "search" ? "bg-accent" : "bg-background/85"
         }`}
+
       >
         <Search className="h-6 w-6" />
       </button>
