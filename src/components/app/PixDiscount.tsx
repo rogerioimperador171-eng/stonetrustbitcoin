@@ -83,14 +83,23 @@ export function PixDiscount() {
       </button>
 
       {aberto ? (
-        <figure className="overflow-hidden rounded-2xl bg-white">
-          <img
-            src={comprovante.url}
-            alt="Comprovante de pagamento Pix no valor de R$ 2.321,28 emitido pelo Nubank"
-            loading="lazy"
-            className="mx-auto block w-full max-w-[420px]"
-          />
-        </figure>
+        erro ? (
+          <p className="rounded-2xl border border-dashed border-border p-4 text-center text-sm text-muted-foreground">
+            A imagem do comprovante não veio junto com o código importado. Envie o arquivo
+            novamente para exibi-la aqui.
+          </p>
+        ) : (
+          <figure className="overflow-hidden rounded-2xl bg-white">
+            <img
+              src={comprovante.url}
+              alt="Comprovante de pagamento Pix no valor de R$ 2.321,28 emitido pelo Nubank"
+              loading="lazy"
+              onError={() => setErro(true)}
+              className="mx-auto block h-auto w-full max-w-[420px]"
+            />
+          </figure>
+        )
+
       ) : null}
     </section>
   );
