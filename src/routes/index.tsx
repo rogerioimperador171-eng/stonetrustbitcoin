@@ -1,24 +1,74 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { StoneHeader } from "@/components/app/StoneHeader";
+import { BottomNav } from "@/components/app/BottomNav";
+import { HomeTab } from "@/components/app/HomeTab";
+import { MarketsTab } from "@/components/app/MarketsTab";
+import { PerpsTab } from "@/components/app/PerpsTab";
+import { SearchTab } from "@/components/app/SearchTab";
+import type { TabId } from "@/components/app/types";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Stone Wallet — Cripto, Perps e Pix com desconto" },
+      {
+        name: "description",
+        content:
+          "Carteira cripto com mercados, perps, gerador de código de transação e Pix com desconto.",
+      },
+      { property: "og:title", content: "Stone Wallet — Cripto, Perps e Pix com desconto" },
+      {
+        property: "og:description",
+        content:
+          "Carteira cripto com mercados, perps, gerador de código de transação e Pix com desconto.",
+      },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
+  const [tab, setTab] = useState<TabId>("home");
+  const [scrollTo, setScrollTo] = useState<string | null>(null);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [tab]);
+
+  useEffect(() => {
+    if (!scrollTo) return;
+    const el = document.getElementById(scrollTo);
+    el?.scrollIntoView({ behavior: "smooth", block: "start" });
+    setScrollTo(null);
+  }, [scrollTo, tab]);
+
+  const goToLabel = (label: string) => {
+    if (label === "Markets") return setTab("markets");
+    if (label === "Perps") return setTab("perps");
+    if (label === "Gerador de código") {
+      setTab("home");
+      return setScrollTo("gerador");
+    }
+    if (label === "Pix com desconto") {
+      setTab("home");
+      return setScrollTo("pix");
+    }
+    setTab("home");
+  };
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="mx-auto flex min-h-screen w-full max-w-[520px] flex-col overflow-x-hidden bg-background text-foreground">
+      <StoneHeader onNavigate={goToLabel} />
+
+      <main className="flex-1 pt-4">
+        {tab === "home" ? <HomeTab onGoTo={(t) => setTab(t)} /> : null}
+        {tab === "markets" ? <MarketsTab /> : null}
+        {tab === "perps" ? <PerpsTab /> : null}
+        {tab === "search" ? <SearchTab /> : null}
+      </main>
+
+      <BottomNav tab={tab} onChange={setTab} />
     </div>
   );
 }
