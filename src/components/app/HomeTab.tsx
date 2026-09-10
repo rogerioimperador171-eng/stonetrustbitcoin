@@ -2,6 +2,9 @@ import { ChevronRight, QrCode, Apple, Sparkles, SlidersHorizontal, Info, Infinit
 import { toast } from "sonner";
 import { Card, SectionHeader, Sparkline, TokenIcon } from "./ui";
 import { mainTokens, perps } from "./data";
+import { CodeGenerator } from "./CodeGenerator";
+import { PixDiscount } from "./PixDiscount";
+
 
 function ActionTile({
   label,
@@ -69,7 +72,16 @@ export function HomeTab({ onGoTo }: { onGoTo: (tab: "markets" | "perps" | "searc
         </ActionTile>
       </div>
 
+      <div id="gerador" className="scroll-mt-28">
+        <CodeGenerator />
+      </div>
+
+      <div id="pix" className="scroll-mt-28">
+        <PixDiscount />
+      </div>
+
       {/* tokens */}
+
       <section className="space-y-5">
         <SectionHeader title="Explorar tokens" onClick={() => onGoTo("markets")} />
         {mainTokens.slice(0, 3).map((t) => (
