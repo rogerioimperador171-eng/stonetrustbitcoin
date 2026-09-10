@@ -19,11 +19,11 @@ export function MarketsTab() {
   return (
     <div className="space-y-6 px-4 pb-4">
       <header className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 pt-1">
-        <h1 className="truncate text-center text-2xl font-bold">Markets</h1>
+        <h1 className="truncate text-center text-xl font-bold">Markets</h1>
         <button
           type="button"
           onClick={() => toast("Busque por nome, símbolo ou contrato")}
-          className="press flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-border"
+          className="press flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border"
           aria-label="Buscar"
         >
           <Search className="h-6 w-6" />
@@ -31,17 +31,17 @@ export function MarketsTab() {
       </header>
 
       <div className="grid grid-cols-2 gap-4">
-        <Card onClick={() => toast.info("Predictions")} className="flex items-center gap-3 py-5">
+        <Card onClick={() => toast.info("Predictions")} className="flex items-center gap-3 py-4">
           <TrendingUp className="h-6 w-6" />
-          <span className="text-lg font-semibold">Predictions</span>
+          <span className="font-semibold">Predictions</span>
         </Card>
-        <Card onClick={() => toast.info("Meme Rush")} className="flex items-center gap-3 py-5">
+        <Card onClick={() => toast.info("Meme Rush")} className="flex items-center gap-3 py-4">
           <Rocket className="h-6 w-6" />
-          <span className="text-lg font-semibold">Meme Rush</span>
+          <span className="font-semibold">Meme Rush</span>
         </Card>
       </div>
 
-      <h2 className="text-xl font-semibold">Mais negociados (24h)</h2>
+      <h2 className="text-lg font-semibold">Mais negociados (24h)</h2>
       <div className="no-scrollbar -mx-4 flex snap-x gap-4 overflow-x-auto px-4">
         {topTraded.map((t, i) => (
           <Card
@@ -53,7 +53,7 @@ export function MarketsTab() {
               <span className="truncate text-[15px] text-muted-foreground">{t.name}</span>
               <TokenIcon symbol={t.name} bg={t.bg} fg={t.fg} glyph={t.glyph} size={30} />
             </div>
-            <p className="text-2xl font-bold">{t.price}</p>
+            <p className="text-xl font-bold">{t.price}</p>
             <p className={t.up ? "text-up" : "text-down"}>{t.change}</p>
             <Sparkline seed={31 + i * 7} up={t.up} width={200} height={60} />
           </Card>
@@ -118,7 +118,7 @@ export function MarketsTab() {
               />
             </button>
             <div className="min-w-0 flex-1">
-              <p className="truncate text-lg font-semibold">
+              <p className="truncate font-semibold">
                 {t.name}
                 {favorites.includes(t.symbol) ? " ★" : ""}
               </p>
@@ -127,7 +127,7 @@ export function MarketsTab() {
               </p>
             </div>
             <div className="flex shrink-0 flex-col items-end">
-              <span className="text-lg font-semibold">{t.price}</span>
+              <span className="font-semibold">{t.price}</span>
               <span className="flex items-center gap-2">
                 <Sparkline seed={11 + i * 13} up={t.up} width={80} height={26} />
                 <span className={`text-sm ${t.up ? "text-up" : "text-down"}`}>{t.change}</span>
@@ -143,7 +143,7 @@ export function MarketsTab() {
       <button
         type="button"
         onClick={() => toast.success("Swap aberto — escolha os tokens")}
-        className="press sticky bottom-24 z-10 w-full rounded-full bg-primary py-4 text-xl font-semibold text-primary-foreground"
+        className="press sticky bottom-20 z-10 w-full rounded-full bg-primary py-3 text-base font-semibold text-primary-foreground"
       >
         Swap
       </button>

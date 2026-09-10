@@ -3,7 +3,7 @@ import { Menu, X } from "lucide-react";
 
 function StoneWordmark() {
   return (
-    <span className="flex items-baseline text-4xl font-bold lowercase leading-none tracking-tight text-stone-brand">
+    <span className="flex items-baseline text-3xl font-bold lowercase leading-none tracking-tight text-stone-brand">
       st
       <svg viewBox="0 0 32 32" className="mx-[1px] h-[0.72em] w-[0.72em] self-center" aria-hidden="true">
         <circle cx="16" cy="16" r="14" fill="currentColor" />
@@ -22,7 +22,7 @@ export function StoneHeader({ onNavigate }: { onNavigate: (label: string) => voi
 
   return (
     <header className="sticky top-0 z-30 px-3 pt-3">
-      <div className="rounded-3xl border border-border bg-background/90 px-5 py-4 backdrop-blur-xl">
+      <div className="rounded-2xl border border-border bg-background/90 px-4 py-3 backdrop-blur-xl">
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4">
           <StoneWordmark />
           <button
@@ -30,9 +30,9 @@ export function StoneHeader({ onNavigate }: { onNavigate: (label: string) => voi
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Fechar menu" : "Abrir menu"}
             aria-expanded={open}
-            className="press flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
+            className="press flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
           >
-            {open ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" strokeWidth={2.5} />}
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" strokeWidth={2.5} />}
           </button>
         </div>
 
@@ -46,7 +46,7 @@ export function StoneHeader({ onNavigate }: { onNavigate: (label: string) => voi
                   onNavigate(l);
                   setOpen(false);
                 }}
-                className="press block w-full rounded-xl px-2 py-3 text-left text-lg font-medium hover:bg-card"
+                className="press block w-full rounded-xl px-2 py-2.5 text-left text-sm font-medium hover:bg-card"
               >
                 {l}
               </button>
